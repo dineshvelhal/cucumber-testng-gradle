@@ -22,7 +22,7 @@ This is a basic framework using
  - Pretty reporting on console
  - HTML reporting
  - Parallel execution support
- - helpful comments added 
+ - Helpful code comments 
  
  It contains only one Cucumber feature file and just one `Scenario Outline` in it.
  
