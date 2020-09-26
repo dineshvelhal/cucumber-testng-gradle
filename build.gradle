@@ -1,0 +1,50 @@
+buildscript {
+    ext {
+        TESTNG_VERSION = '7.3.0'
+        CUCUMBER_VERSION = '6.7.0'
+
+        // Parallel execution will use this value as thread count
+        THREAD_COUNT = 5
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+group 'com.dineshv'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.testng', name: 'testng', version: "$TESTNG_VERSION"
+    testImplementation group: 'io.cucumber', name: 'cucumber-java', version: "$CUCUMBER_VERSION"
+    testImplementation group: 'io.cucumber', name: 'cucumber-core', version: "$CUCUMBER_VERSION"
+    testImplementation group: 'io.cucumber', name: 'cucumber-testng', version: "$CUCUMBER_VERSION"
+    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: "$CUCUMBER_VERSION"
+}
+
+
+test {
+    // tests will be run using the testng
+    useTestNG()
+
+    // We use the DataProvider parallel option.
+    // See the TestRunner.java for the DataProvider annotation
+    jvmArgs(["-Ddataproviderthreadcount=$THREAD_COUNT"])
+
+    // Specific whether test classes should be detected
+    scanForTestClasses = false
+
+    // display the stdout and stderr on the console
+    testLogging.showStandardStreams(true)
+
+    //Specifies whether the build should break when the tests fail.
+    ignoreFailures = false
+
+    // Indicates if test run will halt on the first failed test
+    failFast = true
+}
