@@ -10,10 +10,10 @@ import org.testng.annotations.DataProvider;
         features = {"src/test/resources/features"},
         glue = {"com.dineshv.steps"},
         plugin = {
-                //"pretty",
-                //"html:build/html-reports.html",
-                "timeline:/build/timeline-reports"
-        }
+                "pretty",
+                "html:build/html-reports.html"
+        },
+        monochrome = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 
