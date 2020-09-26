@@ -52,6 +52,31 @@ Feature: Parallel tests using testng
  
  You can see that the scenario runs once for each row in the examples. Based on the thread count, the order and time of execution will vary accordingly.
  
+ The `test` section from `build.gradle` is important. Most of the testing specific configuration is in this section.
+ 
+ ```Groovy
+ test {
+     // tests will be run using the testng
+     useTestNG()
+ 
+     // We use the DataProvider parallel option.
+     // See the TestRunner.java for the DataProvider annotation
+     jvmArgs(["-Ddataproviderthreadcount=$THREAD_COUNT"])
+ 
+     // Specific whether test classes should be detected
+     scanForTestClasses = false
+ 
+     // display the stdout and stderr on the console
+     testLogging.showStandardStreams(true)
+ 
+     //Specifies whether the build should break when the tests fail.
+     ignoreFailures = false
+ 
+     // Indicates if test run will halt on the first failed test
+     failFast = true
+ }
+```
+ 
  ## How to use it?
  Clone or download the master branch. then run `gradlew clean test`.
  
