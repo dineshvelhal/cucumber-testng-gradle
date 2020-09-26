@@ -63,7 +63,7 @@ Feature: Parallel tests using testng
      // See the TestRunner.java for the DataProvider annotation
      jvmArgs(["-Ddataproviderthreadcount=$THREAD_COUNT"])
  
-     // Specific whether test classes should be detected
+     // Specifies whether test classes should be detected
      scanForTestClasses = false
  
      // display the stdout and stderr on the console
