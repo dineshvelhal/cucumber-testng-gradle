@@ -24,11 +24,40 @@ This is a basic framework using
  - Parallel execution support
  - helpful comments added 
  
+ It contains only one Cucumber feature file and just one `Scenario Outline` in it.
+ 
+ ```Gherkin
+Feature: Parallel tests using testng
+
+  Sample feature file for parallel execution demo
+
+  Scenario Outline: Parallel Runs
+    Given I configure parallel test <test_no> with testng
+    When  I run test <test_no>
+    Then  the test <test_no> runs in parallel mode
+
+    Examples:
+      | test_no |
+      | "1"     |
+      | "2"     |
+      | "3"     |
+      | "4"     |
+      | "5"     |
+      | "6"     |
+      | "7"     |
+      | "8"     |
+      | "9"     |
+      | "10"    |
+```
+ 
+ You can see that the scenario runs once for each row in the examples. Based on the thread count, the order and time of execution will vary accordingly.
  
  ## How to use it?
  Clone or download the master branch. then run `gradlew clean test`.
  
  Tweak the settings in `build.gradle` or `TestRunner.java` as needed.
+ 
+ You can then add more libraries like Selenium and develop the framework to suit your needs.
 
 
 
