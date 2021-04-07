@@ -9,7 +9,7 @@ A starter Cucumber test framework using TestNG and Gradle and Allure Reports
  You can then add more libraries like Selenium and develop the framework to suit your needs.
  
  ## Use below gradle command to run the tests and generate allure reports
- `gradle clean test allureReport allureServe`
+ `gradlew clean test allureReport allureServe`
 
 
 
