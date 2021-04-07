@@ -1,40 +1,39 @@
-buildscript {
-    ext {
-        TESTNG_VERSION = '7.3.0'
-        CUCUMBER_VERSION = '6.7.0'
-
-        // Parallel execution will use this value as thread count
-        THREAD_COUNT = 5
-    }
-}
-
 plugins {
     id 'java'
+    id 'maven'
+    id 'io.qameta.allure' version '2.8.1'
 }
 
 group 'com.dineshv'
 version '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
-}
+def TESTNG_VERSION = '7.3.0'
+def CUCUMBER_VERSION = '6.7.0'
+def ALLURE_VERSION = '2.13.6'
+// Parallel execution will use this value as thread count
+def THREAD_COUNT = 1
 
-dependencies {
-    testImplementation group: 'org.testng', name: 'testng', version: "$TESTNG_VERSION"
-    testImplementation group: 'io.cucumber', name: 'cucumber-java', version: "$CUCUMBER_VERSION"
-    testImplementation group: 'io.cucumber', name: 'cucumber-core', version: "$CUCUMBER_VERSION"
-    testImplementation group: 'io.cucumber', name: 'cucumber-testng', version: "$CUCUMBER_VERSION"
-    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: "$CUCUMBER_VERSION"
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+allure {
+    autoconfigure = false
+    aspectjweaver = true
+    version = ALLURE_VERSION
+
+    clean = true
 }
 
 
 test {
     // tests will be run using the testng
-    useTestNG()
+    useTestNG {
+
+    }
 
     // We use the DataProvider parallel option.
     // See the TestRunner.java for the DataProvider annotation
-    jvmArgs(["-Ddataproviderthreadcount=$THREAD_COUNT"])
+     jvmArgs(["-Ddataproviderthreadcount=$THREAD_COUNT"])
 
     // Specific whether test classes should be detected
     scanForTestClasses = false
@@ -48,3 +47,23 @@ test {
     // Indicates if test run will halt on the first failed test
     failFast = true
 }
+
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation group: 'io.qameta.allure', name: 'allure-cucumber6-jvm', version: '2.13.9'
+
+    testImplementation group: 'org.testng', name: 'testng', version: "$TESTNG_VERSION"
+    testImplementation group: 'io.cucumber', name: 'cucumber-java', version: "$CUCUMBER_VERSION"
+    testImplementation group: 'io.cucumber', name: 'cucumber-core', version: "$CUCUMBER_VERSION"
+    testImplementation group: 'io.cucumber', name: 'cucumber-testng', version: "$CUCUMBER_VERSION"
+    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: "$CUCUMBER_VERSION"
+    testImplementation("io.qameta.allure:allure-java-commons:$ALLURE_VERSION")
+}
+
+
+

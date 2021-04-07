@@ -1,23 +1,15 @@
-Feature: Parallel tests using testng
+Feature: Artithmatic Operations
 
-  Sample feature file for parallel execution demo
+  Sample feature file for Arithmatic Operations
 
-  Scenario Outline: Parallel Runs
-    Given I configure parallel test <test_no> with testng
-    When  I run test <test_no>
-    Then  the test <test_no> runs in parallel mode
+
+  Scenario Outline: Addition
+    Given Two numbers
+    When  I add <A> and <B>
+    Then  the addition is <SUM>
 
     Examples:
-      | test_no |
-      | "1"     |
-      | "2"     |
-      | "3"     |
-      | "4"     |
-      | "5"     |
-      | "6"     |
-      | "7"     |
-      | "8"     |
-      | "9"     |
-      | "10"    |
-
+      | A  | B  | SUM |
+      | 2  | 5  | 7   |
+      | 3  | 15 | 18  |
 

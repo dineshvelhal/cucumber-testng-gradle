@@ -1,22 +1,51 @@
 package com.dineshv.steps;
 
+import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class Steps {
-    @Given("I configure parallel test {string} with testng")
-    public void i_configure_parallel_test_with_testng(String testNo) {
-        //System.out.println(testNo +": I configure parallel test with testng");
+    int sum = 0;
+
+    @Before
+    public void before() {
+        System.out.println("HOOK - @Before ------------------------------------------------");
     }
 
-    @When("I run test {string}")
-    public void i_run_test(String testNo) {
-        //System.out.println(testNo + ": I run test");
+    @After
+    public void after() {
+        System.out.println("HOOK -  @After ------------------------------------------------");
     }
 
-    @Then("the test {string} runs in parallel mode")
-    public void the_test_runs_in_parallel_mode(String testNo) {
-        //System.out.println(testNo + ": the test runs in parallel mode");
+    @BeforeStep
+    public void beforeStep() {
+        System.out.println("HOOK - @BeforeStep ------------------------------------------------");
     }
+
+    @AfterStep
+    public void afterStep() {
+        System.out.println("HOOK -  @AfterStep ------------------------------------------------");
+    }
+
+    @Given("Two numbers")
+    public void two_numbers() {
+
+    }
+
+    @When("I add {int} and {int}")
+    public void i_add_and(Integer a, Integer b) {
+        sum = a + b;
+    }
+
+    @Then("the addition is {int}")
+    public void the_addition_is(Integer addition) throws Exception {
+        if( sum != addition) {
+            throw new Exception("Incorrect addition");
+        }
+    }
+
 }
